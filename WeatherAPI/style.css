@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+body{
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    background-image: url("mountain image.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    min-height: 100vh;
+    background-size: cover;
+}
+
+#container{
+    display: flex;
+    background-color: rgba(26, 26, 26, 0.85);
+    color: white;
+    margin: auto;
+    align-items: center;
+    border-radius: 30px;
+    width: 90vw;
+    height: 80vh;
+    justify-content: space-between;
+    padding: 30px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+    gap: 30px;
+}
+
+/* Left side: Weather information */
+#weather-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    min-width: 300px;
+}
+
+#weather-info h2 {
+    margin: 0 0 30px 0;
+    font-size: 2.2rem;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.weather-item {
+    display: flex;
+    justify-content: center;
+
+    font-size: 1.2rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.weather-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+}
+
+.weather-item .label {
+    font-weight: 500;
+    color: #e0e0e0;
+    font-size: 1.3rem;
+}
+
+.weather-item span:last-child {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+/* Right side: Map container */
+#mapSearch-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    min-width: 400px;
+    height: 100%; /* Take full height of parent */
+    width: 100%
+}
+
+#maptab {
+    width: 100%;
+    flex: 1; /* Take remaining space after search bar */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    min-height: 0; /* Allow flex shrinking */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    #container {
+        flex-direction: column;
+        width: 95vw;
+        height: 90vh;
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    #weather-info, #map-container {
+        flex: none;
+        width: 100%;
+        min-width: auto;
+    }
+    
+    #maptab {
+        height: 300px;
+    }
+    
+    .weather-item {
+        padding: 15px;
+        font-size: 1rem;
+    }
+    
+    #weather-info h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+}
+
+/* Additional styling for better visibility */
+#temp, #app_temp, #description, #time {
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#search-container {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-shrink: 0; /* Don't shrink the search bar */
+}
+
+#search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+#search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+#search-button {
+    padding: 12px 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+}
+
+#search-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+#weather-info #label {
+    font-size: 5rem !important; /* Increase from default size */
+    text-shadow:rgba(255,255, 255, 0.7) 2px 2px 4px;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+</head>
+<body>
+  <div id="container">
+    <!-- Left side: Weather information -->
+    <div id="weather-info">
+      <h2 id="label">Weather Information</h2>
+      <div class="weather-item">
+        <span class="label">Temperature:  </span>
+        <span id="temp">--</span>°C
+      </div>
+      <div class="weather-item">
+        <span class="label">Feels Like:  </span>
+        <span id="app_temp">--</span>°C
+      </div>
+      <div class="weather-item">
+        <span class="label">Description:  </span>
+        <span id="description">--</span>
+      </div>
+      <div class ="weather-item">
+        <img id="weather-icon" src="" alt="">
+      </div>
+      
+    </div>
+
+    <div id="mapSearch-container">
+      <div id="search-container">
+        <input type="text" id="search-input" placeholder="Search for a city...">
+        <button id="search-button">Search</button>
+      </div>
+      <div id="maptab"></div>
+    </div>
+  </div>
+
+  <script>
+    const map = L.map("maptab").setView([43.65, -79.38], 10); //default is the 6ix
+    //tile layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    
+    //create a marker 
+    let marker = L.marker([43.65, -79.38]).addTo(map);
+
+    map.on('click', async function(e){  
+      const lat = e.latlng.lat;
+      const lng = e.latlng.lng;
+      marker.setLatLng([lat,lng]);
+
+      //reverse geocoding using openstreet nominatim
+      const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`;  
+      try{
+        const response= await fetch(url)
+        const data = await response.json();
+
+        let city = data.address.city || data.address.town || data.address.village || data.address.hamlet || "Unknown location";
+        document.getElementById("label").textContent = city;
+
+        //calls weather api to fetch weather for new coordinates
+        fetchWeather(lat,lng);
+      }
+      catch(error){
+        console.error("Error fetching city name: ", error);
+      }
+    })
+  </script>
+  <script src="main.js"></script>
+  
+</body>
+</html>
