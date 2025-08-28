@@ -1,2 +1,2 @@
 # Weather-app
-[Try here](http://127.0.0.1:5500/index.html)
+Gotta figure out how to make the link available to others
